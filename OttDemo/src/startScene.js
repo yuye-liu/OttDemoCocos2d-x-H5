@@ -20,13 +20,25 @@ var startMenuLayer2 = ccs.UILayer.extend({
             var widget = ccs.GUIReader.getInstance().widgetFromJsonFile(s_HiSiliconDemo_1);
             this.addWidget(widget);
             this.movie2_0 = this.getWidgetByName("Movie2-0");
-            this.movie2_0.setOpacity(0);
             var  movie1_1 = this.getWidgetByName("Movie1-1");
             movie1_1.addTouchEventListener(this.movieTouchEvent, movie1_1);
+            var  movie3_0 = this.getWidgetByName("Movie3-0");
+            movie3_0.addTouchEventListener(this.movieTouchEvent, movie3_0);
             var  movie4_1 = this.getWidgetByName("Movie4-1");
             movie4_1.addTouchEventListener(this.movieTouchEvent, movie4_1);
+            var  movie5_1 = this.getWidgetByName("Movie5-1");
+            movie5_1.addTouchEventListener(this.movieTouchEvent, movie5_1);
+            var  movie5_2 = this.getWidgetByName("Movie5-2");
+            movie5_2.setVisible(true);
+            movie5_2.addTouchEventListener(this.movieTouchEvent, movie5_2);
             var  movie6_1 = this.getWidgetByName("Movie6-1");
             movie6_1.addTouchEventListener(this.movieTouchEvent, movie6_1);
+            var  series_Background = this.getWidgetByName("seriesBackground");
+            series_Background.addTouchEventListener(this.movieTouchEvent, series_Background);
+
+            //movie5_1.runAction(cc.RepeatForever.create(cc.Sequence.create(cc.FadeOut.create(1.0),cc.DelayTime.create(2.0),cc.FadeIn.create(1.0))));
+            movie5_2.runAction(cc.RepeatForever.create(cc.Sequence.create(cc.DelayTime.create(2.0),cc.FadeIn.create(2.0),cc.DelayTime.create(2.0),cc.FadeOut.create(2.0))));
+
             this.movieEffect = ccs.ImageView.create();
             this.movieEffect.loadTexture(s_movie_effect);
 
@@ -98,6 +110,9 @@ var startMenuLayer2 = ccs.UILayer.extend({
     }
 });
 
+var self;
+var menu_effect_action_flag = false;
+
 var startMenuLayer1 = ccs.UILayer.extend({
 
     menuEffect:null,
@@ -106,6 +121,7 @@ var startMenuLayer1 = ccs.UILayer.extend({
         if(this._super()){
 
             thisScene = scene;
+            self = this;
             var widget = ccs.GUIReader.getInstance().widgetFromJsonFile(s_HiSiliconDemo_2);
             this.addWidget(widget);
             var menu1_0 = this.getWidgetByName("Menu1-0");
@@ -131,18 +147,27 @@ var startMenuLayer1 = ccs.UILayer.extend({
     onMenuChange:function(pSender, type){
 
         if(ccs.TouchEventType.began==type){
+            if(!menu_effect_action_flag) {
+                menu_effect_action_flag = true;
+                var startLayer = self.getParent().getChildByTag(200);
+                var positionNow = startLayer.getPosition();
+                var actionBy = cc.EaseBackIn.create(cc.MoveBy.create(0.5, cc.p(2000, 0)));
+                var actionBack = cc.Sequence.create(actionBy, cc.CallFunc.create(self.setLayer2Back, startLayer, self), actionBy.clone(),cc.CallFunc.create(self.setEffectActionDone,startLayer,self));
+                startLayer.runAction(actionBack);
 
-            var startLayer1 = thisScene.getChildByTag(200);
-//            var startLayer2 = thisScene.getChildByTag(300);
-            var positionNow = startLayer1.getPosition();
-            var actionBy1 = cc.EaseBackIn.create(cc.MoveBy.create(1, cc.p(2000,0)));
-//            var sequence1 = cc.Sequence.create(actionBy1,cc.CallFunc.create(this.layer2SetPosition,startLayer1))
-//            var actionBy2 = cc.MoveBy.create(10, cc.p(2000,0));
-            startLayer1.runAction(actionBy1);
-            startLayer1.setPosition(positionNow);
-//            startLayer2.runAction(actionBy2);
+                //self.menuEffect.setPosition(cc.p(pSender.getPositionX(),pSender.getPositionY()-pSender.getContentSize().height/2));
+                self.menuEffect.runAction(cc.MoveTo.create(0.2, cc.p(pSender.getPositionX(), pSender.getPositionY() - pSender.getContentSize().height / 2)));
+            }
             return false;
         }
+    },
+
+    setLayer2Back:function(){
+        var startLayer = this.getParent().getChildByTag(200);
+        startLayer.setPosition(cc.p(-2000,0));
+    },
+    setEffectActionDone:function(){
+        menu_effect_action_flag = false;
     },
 
     layer2SetPosition:function(layer2,position){
@@ -165,6 +190,7 @@ var startScene = cc.Scene.extend({
         this._super();
         var startLayer1 = new startMenuLayer1();
         startLayer1.init(this);
+
         var startLayer2 = new startMenuLayer2();
         startLayer2.init();
         startLayer2.setTag(200);
