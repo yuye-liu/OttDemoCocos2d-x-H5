@@ -31,9 +31,9 @@ var welcomeScene = cc.Scene.extend({
 
         this.addChild(layer);
 
-        layer.setTouchEnabled(true);
-        loading.setTouchEnabled(true);
-        loading.addTouchEventListener(this.replaceScene, loading);
+        //layer.setTouchEnabled(true);
+        //loading.setTouchEnabled(true);
+        //loading.addTouchEventListener(this.replaceScene, loading);
 
     },
 
