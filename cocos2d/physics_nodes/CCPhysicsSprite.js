@@ -240,10 +240,10 @@
      * @return {cc.Sprite}
      * @example
      * //create a sprite with filename
-     * var sprite1 = cc.Sprite.create("HelloHTML5World.png");
+     * var sprite1 = cc.Sprite.create("OttDemo.png");
      *
      * //create a sprite with filename and rect
-     * var sprite2 = cc.PhysicsSprite.create("HelloHTML5World.png",cc.rect(0,0,480,320));
+     * var sprite2 = cc.PhysicsSprite.create("OttDemo.png",cc.rect(0,0,480,320));
      */
     cc.PhysicsSprite.create = function (fileName, rect) {
         var argnum = arguments.length;

@@ -290,7 +290,7 @@ if (cc.SPRITEBATCHNODE_RENDER_SUBPIXEL) {
  *
  * @example
  * var aSprite = new cc.Sprite();
- * aSprite.initWithFile("HelloHTML5World.png",cc.rect(0,0,480,320));
+ * aSprite.initWithFile("OttDemo.png",cc.rect(0,0,480,320));
  */
 cc.Sprite = cc.NodeRGBA.extend(/** @lends cc.Sprite# */{
     RGBAProtocol:true,
@@ -1128,7 +1128,7 @@ cc.Sprite = cc.NodeRGBA.extend(/** @lends cc.Sprite# */{
      * @return {Boolean} true if the sprite is initialized properly, false otherwise.
      * @example
      * var mySprite = new cc.Sprite();
-     * mySprite.initWithFile("HelloHTML5World.png",cc.rect(0,0,480,320));
+     * mySprite.initWithFile("OttDemo.png",cc.rect(0,0,480,320));
      */
     initWithFile:function (filename, rect) {
         if(!filename)
@@ -1155,7 +1155,7 @@ cc.Sprite = cc.NodeRGBA.extend(/** @lends cc.Sprite# */{
      * @param {Boolean} [rotated] Whether or not the texture rectangle is rotated.
      * @return {Boolean} true if the sprite is initialized properly, false otherwise.
      * @example
-     * var img =cc.TextureCache.getInstance().addImage("HelloHTML5World.png");
+     * var img =cc.TextureCache.getInstance().addImage("OttDemo.png");
      * var mySprite = new cc.Sprite();
      * mySprite.initWithTexture(img,cc.rect(0,0,480,320));
      */
@@ -2195,7 +2195,7 @@ if(cc.Browser.supportWebGL){
  * @return {cc.Sprite} A valid sprite object
  * @example
  * //get an image
- * var img = cc.TextureCache.getInstance().addImage("HelloHTML5World.png");
+ * var img = cc.TextureCache.getInstance().addImage("OttDemo.png");
  *
  * //create a sprite with texture
  * var sprite1 = cc.Sprite.createWithTexture(img);
@@ -2241,10 +2241,10 @@ cc.Sprite.createWithTexture = function (texture, rect) {
  * @return {cc.Sprite} A valid sprite object
  * @example
  * //create a sprite with filename
- * var sprite1 = cc.Sprite.create("HelloHTML5World.png");
+ * var sprite1 = cc.Sprite.create("OttDemo.png");
  *
  * //create a sprite with filename and rect
- * var sprite2 = cc.Sprite.create("HelloHTML5World.png",cc.rect(0,0,480,320));
+ * var sprite2 = cc.Sprite.create("OttDemo.png",cc.rect(0,0,480,320));
  */
 cc.Sprite.create = function (fileName, rect) {
     var argnum = arguments.length;
