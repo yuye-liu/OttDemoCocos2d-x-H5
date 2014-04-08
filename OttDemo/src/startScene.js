@@ -20,6 +20,7 @@ var startMenuLayer2 = ccs.UILayer.extend({
             var widget = ccs.GUIReader.getInstance().widgetFromJsonFile(s_HiSiliconDemo_1);
             this.addWidget(widget);
             this.movie2_0 = this.getWidgetByName("Movie2-0");
+            this.movie2_0.setVisible(false);
             var  movie1_1 = this.getWidgetByName("Movie1-1");
             movie1_1.addTouchEventListener(this.movieTouchEvent, movie1_1);
             var  movie3_0 = this.getWidgetByName("Movie3-0");
